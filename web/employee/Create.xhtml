@@ -1,0 +1,70 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:jsf="http://xmlns.jcp.org/jsf">
+    
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">Crear Empleado</ui:define> 
+    
+        <ui:define name="body">
+        <h1>Empleados: Agregar</h1>
+        <form jsf:id="createform">
+            <h:panelGrid columns="3">
+                <label>ID</label>
+                <input type="number" jsf:id="idInpuText" jsf:required="true"
+                            jsf:requiredMessage="por favor ingrese un ID"
+                             jsf:validatorMessage="Por favot ingrese un ID entre 1 y 999"
+                            jsf:converterMessage="Ingrese solo numeros"
+                             jsf:value ="#{employeeControler.empleadoActual.id}">  
+                    <f:validateLongRange minimum="1" maximum="999"/>
+                    <f:ajax execute="@this" render="idMessage"/>
+                </input>
+                <h:message id="idMessage" for="idinputText" styleClass ="error"/>
+                
+                
+                <h:outputLabel value="NOMBRE"></h:outputLabel>
+                <h:inputText id="nombreInpuText" required="true"
+                             requiredMessage="por favor ingrese un NOMBRE"
+                             value ="#{employeeControler.empleadoActual.firstName}"
+                             maxlength="20">
+                </h:inputText>             
+                <h:message for="nombreinputText" styleClass ="error"/>
+                
+                <h:outputLabel value="APELLIDO"></h:outputLabel>
+                <h:inputText id="apellidoInpuText" required="true"
+                             requiredMessage="por favor ingrese un APELLIDOS"
+                             value ="#{employeeControler.empleadoActual.lastName}"
+                             maxlength="20">
+                </h:inputText>             
+                <h:message for="apellidoinputText" styleClass ="error"/>
+                
+                <h:outputLabel value="FECHA DE NACIMIENTO"></h:outputLabel>
+                
+                <h:inputText id="fechaInpuText" required="true"
+                             requiredMessage="por favor ingrese un facha de nacimiento"
+                             value ="#{employeeControler.empleadoActual.birthDate}"
+                             maxlength="20">
+                    <f:convertDateTime pattern="MMM d,yyyy"/>
+                </h:inputText>             
+                <h:message for="fechadenacimientoinputText" styleClass ="error"/>
+                
+                <h:outputLabel value="SALARIO"></h:outputLabel>
+                <h:inputText id="salarioInpuText" required="true"
+                             requiredMessage="por favor ingrese un Salario"
+                             value ="#{employeeControler.empleadoActual.salary}"
+                             maxlength="20">
+                </h:inputText>             
+                <h:message for="salarioinputText" styleClass ="error"/>
+                
+            </h:panelGrid>
+                    <h:commandButton  value=" Guardar" action="#{employeeControler.addEmployee}"/> 
+                    <h:button  value=" cancelar" outcome="List"/> 
+                    <h:button value="inicio" outcome="/index"/>
+        </form>
+    </ui:define>
+    </ui:composition>
+</html>
+
